@@ -5,16 +5,16 @@ const btnRight = document.querySelector('.slider__btn-right');
 
 const sliderImages = [
   {
-    src: 'https://drive.google.com/uc?id=1BzhhKeOc9XyZMPXnZAi_JiOYdZrwLYu-',
-    text: 'Taste the magic'
+    src: 'https://unsplash.com/photos/l1ICIlRbL9I',
+    text: 'Desert'
   },
   {
-    src: 'https://drive.google.com/uc?id=1M1TR1HjJCj-TuOa54jzty8QK9QUdNfSC',
-    text: 'Taste the incredible'
+    src: 'https://unsplash.com/photos/QbdzCEXy5vs',
+    text: 'Greenry'
   },
   {
-    src: 'https://drive.google.com/uc?id=1twyebwsDDBtPiyFHxTIf9P26sDGiq5Qi',
-    text: 'Taste the dream'
+    src: 'https://unsplash.com/photos/PLyOBz90pNE',
+    text: 'Ice'
   }
 ];
 
