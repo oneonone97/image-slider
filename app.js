@@ -1,43 +1,85 @@
-const slides = document.querySelectorAll(".slide");
-const nextBtn = document.querySelector(".nextBtn");
-const prevBtn = document.querySelector(".prevBtn");
-slides.forEach(function (slide, index) {
-  slide.style.left = `${index * 100}%`;
-});
-let counter = 0;
-nextBtn.addEventListener("click", function () {
-  counter++;
-  carousel();
-});
+const slideContainer = document.querySelector('.slider');
+const sliderText = document.querySelector('.slider--text');
+const btnLeft = document.querySelector('.slider__btn-left');
+const btnRight = document.querySelector('.slider__btn-right');
 
-prevBtn.addEventListener("click", function () {
-  counter--;
-  carousel();
-});
-
-function carousel() {
-  // working with slides
-  if (counter === slides.length) {
-  counter = 0;
- }
- if (counter < 0) {
-   counter = slides.length - 1;
- }
-  // working with buttons
-
-  if (counter < slides.length - 1) {
-    nextBtn.style.display = "block";
-  } else {
-    nextBtn.style.display = "none";
+const sliderImages = [
+  {
+    src: 'https://drive.google.com/uc?id=1BzhhKeOc9XyZMPXnZAi_JiOYdZrwLYu-',
+    text: 'Taste the magic'
+  },
+  {
+    src: 'https://drive.google.com/uc?id=1M1TR1HjJCj-TuOa54jzty8QK9QUdNfSC',
+    text: 'Taste the incredible'
+  },
+  {
+    src: 'https://drive.google.com/uc?id=1twyebwsDDBtPiyFHxTIf9P26sDGiq5Qi',
+    text: 'Taste the dream'
   }
-  if (counter > 0) {
-    prevBtn.style.display = "block";
-  } else {
-    prevBtn.style.display = "none";
-  }
-  slides.forEach(function (slide) {
-    slide.style.transform = `translateX(-${counter * 100}%)`;
-  });
-}
+];
 
-prevBtn.style.display = "none";
+let slideCounter = 0;
+const startSlider = () => {
+  slideContainer.style.backgroundImage = `linear-gradient(
+      to right,
+      rgba(34, 34, 34, 0.4),
+      rgba(68, 68, 68, 0.4)
+    ), url(${sliderImages[0].src})`;
+  sliderText.innerHTML = sliderImages[0].text;
+};
+btnRight.addEventListener('click', function() {
+  if (slideCounter === sliderImages.length - 1) {
+    slideContainer.style.backgroundImage = `linear-gradient(
+      to right,
+      rgba(34, 34, 34, 0.4),
+      rgba(68, 68, 68, 0.4)
+    ), url(${sliderImages[0].src})`;
+    sliderText.innerHTML = sliderImages[0].text;
+    slideCounter = -1;
+
+    slideContainer.classList.add('fadeIn');
+    setTimeout(() => {
+      slideContainer.classList.remove('fadeIn');
+    }, 1000);
+  }
+  slideContainer.style.backgroundImage = `linear-gradient(
+      to right,
+      rgba(34, 34, 34, 0.4),
+      rgba(68, 68, 68, 0.4)
+      ),url(${sliderImages[slideCounter + 1].src})`;
+  sliderText.innerHTML = sliderImages[slideCounter + 1].text;
+  slideCounter++;
+  slideContainer.classList.add('fadeIn');
+  setTimeout(() => {
+    slideContainer.classList.remove('fadeIn');
+  }, 1000);
+});
+btnLeft.addEventListener("click", function() {
+  if (slideCounter === 0) {
+    slideContainer.style.backgroundImage = `linear-gradient(
+      to right,
+      rgba(34, 34, 34, 0.4),
+      rgba(68, 68, 68, 0.4)
+    ),url(${sliderImages[sliderImages.length - 1].src})`;
+    sliderText.innerHTML = sliderImages[sliderImages.length - 1].text;
+    slideCounter = sliderImages.length;
+    slideContainer.classList.add("fadeIn");
+    setTimeout(() => {
+      slideContainer.classList.remove("fadeIn");
+    }, 1000);
+  }
+
+  slideContainer.style.backgroundImage = `linear-gradient(
+      to right,
+      rgba(34, 34, 34, 0.4),
+      rgba(68, 68, 68, 0.4)
+    ),url(${sliderImages[slideCounter - 1].src})`;
+  sliderText.innerHTML = sliderImages[slideCounter - 1].text;
+  slideCounter--;
+  slideContainer.classList.add("fadeIn");
+  setTimeout(() => {
+    slideContainer.classList.remove("fadeIn");
+  }, 1000);
+});
+
+startSlider();
